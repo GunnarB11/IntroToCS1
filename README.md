@@ -22,93 +22,458 @@ Gunnar Brown
 
 
 
-import math as m
+# -*- Treasure Hunt Program -*-
 
-#greeting -
-print('Hey there and welcome to the calendar program! ')
+#Noah Gunnar Nick
+# Team Slytherin
 
+#Lab 3  - Treasure Hunt
 
-#var list
+#import
+import random
+import pprint
 
-year = int(input('What year are you looking for? 1800-2099 '))
+#Add a greeting.
+#prompt for difficulty
+# 3x3, 4x4, 5x5
 
-while year < 1800 or year > 2099:
-year = input('Please input a corresponding year. 1800-2099: ')
+#RANDOMLY place treasure on grid
+#should be with two random integers in a list
 
-century_digits = int(str(year)[:2])
+#print where the user has already guessed
 
-year_digits = int(str(year)[-2:])
+#Prompt when the user has guessed where the box is
 
-month = input('Please input a month. ex: Jan, Feb, Mar: ')
-monthList = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+#check if box is there
 
+#check to see if there are any guesses left
 
-while month not in monthList:
-month = input('Please input a correct month. ')
-
-value = year_digits + m.floor(year_digits/4)
-
-
-
-#Century Value Calulations
-if century_digits == 18:
-value = value + 2
-elif century_digits == 20:
-value = value + 6
+#PPrint function
+def grid_maker3 (h,w):
+grid3=[['-' for i in range(w)]for i in range(h)]
+return grid3
 
 
 
-#Month Value Calculations
-
-if month == monthList[0] and (year%4 != 0):
-value= value +1
-elif month == monthList[1] and (year%4 == 0):
-value= value +3
-if month == monthList[1] and (year%4 != 0):
-value= value +4
-elif month == monthList[2] or month== monthList[10]:
-value= value +4
-elif month == monthList[3] or month==monthList[6]:
-value= value +0
-elif month == monthList[4]:
-value= value +2
-elif month == monthList[5]:
-value= value +5
-elif month == monthList[7]:
-value= value +3
-elif month == monthList[9]:
-value= value +1
-elif month == monthList[8] or month==monthList[11]:
-value= value +6
+grid3 = input('Please input the size of the grid you would like to use. (Please input 3x3, 4x4, or 5x5.)')
+guessCount = 0
 
 
-day = 0
-#Days in month
-if month == monthList[1]:
-if (year%4)==0:
-day = 29
+
+while grid3 !='done':
+if grid3 == '3x3':
+guessCount = 6
+elif grid3 == '4x4':
+guessCount = 12
+elif grid3 == '5x5':
+guessCount = 17
+
+if grid3 == '3x3':
+
+grid_3x3=grid_maker3(3,3)
+pprint.pprint(grid_3x3)
+
+ans=[random.randint(1,9) for _ in range(5)]
+
+while guessCount!=0:
+guess= int(input('Please input guess. (X means treasure is not there,\n while O means the treasuer is there.)'))
+if guess in(1,2,3,4,5,6,7,8,9):
+#Number 1
+if guess==1 and guess in ans:
+grid_3x3[0][0]='O'
+pprint.pprint(grid_3x3)
+elif guess==1 and guess not in ans:
+grid_3x3[0][0]='X'
+pprint.pprint(grid_3x3)
+#Number 2
+elif guess==2 and guess in ans:
+grid_3x3[0][1]='O'
+pprint.pprint(grid_3x3)
+elif guess==2 and guess not in ans:
+grid_3x3[0][1]='X'
+pprint.pprint(grid_3x3)
+#Number 3
+elif guess==3 and guess in ans:
+grid_3x3[0][2]='O'
+pprint.pprint(grid_3x3)
+elif guess==3 and guess not in ans:
+grid_3x3[0][2]='X'
+pprint.pprint(grid_3x3)
+#Number 4
+elif guess==4 and guess in ans:
+grid_3x3[1][0]='O'
+pprint.pprint(grid_3x3)
+elif guess==4 and guess not in ans:
+grid_3x3[1][0]='X'
+pprint.pprint(grid_3x3)
+#Number 5
+elif guess==5 and guess in ans:
+grid_3x3[1][1]='O'
+pprint.pprint(grid_3x3)
+elif guess==5 and guess not in ans:
+grid_3x3[1][1]='X'
+pprint.pprint(grid_3x3)
+#Number 6
+elif guess==6 and guess in ans:
+grid_3x3[1][2]='O'
+pprint.pprint(grid_3x3)
+elif guess==6 and guess not in ans:
+grid_3x3[1][2]='X'
+pprint.pprint(grid_3x3)
+#Number 7
+elif guess==7 and guess in ans:
+grid_3x3[2][0]='O'
+pprint.pprint(grid_3x3)
+elif guess==7 and guess not in ans:
+grid_3x3[2][0]='X'
+pprint.pprint(grid_3x3)
+#Number 8
+elif guess==8 and guess in ans:
+grid_3x3[2][1]='O'
+pprint.pprint(grid_3x3)
+elif guess==8 and guess not in ans:
+grid_3x3[2][1]='X'
+pprint.pprint(grid_3x3)
+#Number 9
+elif guess==9 and guess in ans:
+grid_3x3[2][2]='O'
+pprint.pprint(grid_3x3)
+elif guess==9 and guess not in ans:
+grid_3x3[2][2]='X'
+pprint.pprint(grid_3x3)
+
+guessCount=guessCount-1
+
+
 else:
-day = 28
-elif month in('Jan', 'Mar', 'May', 'Jul', 'Aug', 'Oct', 'Dec'):
-day = 31
-elif month in('Sep', 'Apr', 'Jun', 'Nov'):
-day = 30
+print('Please input a correct guess.')
+int(input('Input a guess again.'))
 
 
-value = (value + 1)%7
+elif grid3 == '4x4':
+grid_4x4=grid_maker3(4,4)
+pprint.pprint(grid_4x4)
 
-start=0
-if value == 1:
-start=='Sun'
-elif value == 2:
-start='Mon'
-elif value == 3:
-start='Tues'
-elif value == 4:
-start='Wed'
-elif value == 5:
-start='Thur'
-elif value == 6:
-start='Fri'
-elif value == 0:
-start='Sat'
+ans=[random.randint(1,16) for _ in range(5)]
+
+while guessCount!=0:
+guess= int(input('Please input guess. (X means treasure is not there,\n while O means the treasuer is there.)'))
+if guess in(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16):
+#Number 1
+if guess==1 and guess in ans:
+grid_4x4[0][0]='O'
+pprint.pprint(grid_4x4)
+elif guess==1 and guess not in ans:
+grid_4x4[0][0]='X'
+pprint.pprint(grid_4x4)
+#Number 2
+elif guess==2 and guess in ans:
+grid_4x4[0][1]='O'
+pprint.pprint(grid_4x4)
+elif guess==2 and guess not in ans:
+grid_4x4[0][1]='X'
+pprint.pprint(grid_4x4)
+#Number 3
+elif guess==3 and guess in ans:
+grid_4x4[0][2]='O'
+pprint.pprint(grid_4x4)
+elif guess==3 and guess not in ans:
+grid_4x4[0][2]='X'
+pprint.pprint(grid_4x4)
+#Number 4
+elif guess==4 and guess in ans:
+grid_4x4[0][3]='O'
+pprint.pprint(grid_4x4)
+elif guess==4 and guess not in ans:
+grid_4x4[0][3]='X'
+pprint.pprint(grid_4x4)
+#Number 5
+elif guess==5 and guess in ans:
+grid_4x4[1][0]='O'
+pprint.pprint(grid_4x4)
+elif guess==5 and guess not in ans:
+grid_4x4[1][0]='X'
+pprint.pprint(grid_4x4)
+#Number 6
+elif guess==6 and guess in ans:
+grid_4x4[1][1]='O'
+pprint.pprint(grid_4x4)
+elif guess==6 and guess not in ans:
+grid_4x4[1][1]='X'
+pprint.pprint(grid_4x4)
+#Number 7
+elif guess==7 and guess in ans:
+grid_4x4[1][2]='O'
+pprint.pprint(grid_4x4)
+elif guess==7 and guess not in ans:
+grid_4x4[1][2]='X'
+pprint.pprint(grid_4x4)
+#Number 8
+elif guess==8 and guess in ans:
+grid_4x4[1][3]='O'
+pprint.pprint(grid_4x4)
+elif guess==8 and guess not in ans:
+grid_4x4[1][3]='X'
+pprint.pprint(grid_4x4)
+#Number 9
+elif guess==9 and guess in ans:
+grid_4x4[2][0]='O'
+pprint.pprint(grid_4x4)
+elif guess==9 and guess not in ans:
+grid_4x4[2][0]='X'
+pprint.pprint(grid_4x4)
+#Number 10
+elif guess==10 and guess in ans:
+grid_4x4[2][1]='O'
+pprint.pprint(grid_4x4)
+elif guess==10 and guess not in ans:
+grid_4x4[2][1]='X'
+pprint.pprint(grid_4x4)
+#Number 11
+elif guess==11 and guess in ans:
+grid_4x4[2][2]='O'
+pprint.pprint(grid_4x4)
+elif guess==11 and guess not in ans:
+grid_4x4[2][2]='X'
+pprint.pprint(grid_4x4)
+#Number 12
+elif guess==12 and guess in ans:
+grid_4x4[2][3]='O'
+pprint.pprint(grid_4x4)
+elif guess==12 and guess not in ans:
+grid_4x4[2][3]='X'
+pprint.pprint(grid_4x4)
+#Number 13
+elif guess==13 and guess in ans:
+grid_4x4[3][0]='O'
+pprint.pprint(grid_4x4)
+elif guess==13 and guess not in ans:
+grid_4x4[3][0]='X'
+pprint.pprint(grid_4x4)
+#Number 14
+elif guess==14 and guess in ans:
+grid_4x4[3][1]='O'
+pprint.pprint(grid_4x4)
+elif guess==14 and guess not in ans:
+grid_4x4[3][1]='X'
+pprint.pprint(grid_4x4)
+#Number 15
+elif guess==15 and guess in ans:
+grid_4x4[3][2]='O'
+pprint.pprint(grid_4x4)
+elif guess==15 and guess not in ans:
+grid_4x4[3][2]='X'
+pprint.pprint(grid_4x4)
+#Number 16
+elif guess==16 and guess in ans:
+grid_4x4[3][3]='O'
+pprint.pprint(grid_4x4)
+elif guess==16 and guess not in ans:
+grid_4x4[3][3]='X'
+pprint.pprint(grid_4x4)   
+guessCount=guessCount-1
+
+else:
+print('Please input a correct guess.')
+int(input('Input a guess again.'))
+
+
+
+elif grid3 == '5x5':
+grid_5x5=grid_maker3(5,5)
+pprint.pprint(grid_5x5)
+
+ans=[random.randint(1,25) for _ in range(5)]
+
+while guessCount!=0:
+guess= int(input('Please input guess. (X means treasure is not there,\n while O means the treasuer is there.)'))
+if guess in(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25):
+#Number 1
+if guess==1 and guess in ans:
+grid_5x5[0][0]='O'
+pprint.pprint(grid_5x5)
+elif guess==1 and guess not in ans:
+grid_5x5[0][0]='X'
+pprint.pprint(grid_5x5)
+#Number 2
+elif guess==2 and guess in ans:
+grid_5x5[0][1]='O'
+pprint.pprint(grid_5x5)
+elif guess==2 and guess not in ans:
+grid_5x5[0][1]='X'
+pprint.pprint(grid_5x5)
+#Number 3
+elif guess==3 and guess in ans:
+grid_5x5[0][2]='O'
+pprint.pprint(grid_5x5)
+elif guess==3 and guess not in ans:
+grid_5x5[0][2]='X'
+pprint.pprint(grid_5x5)
+#Number 4
+elif guess==4 and guess in ans:
+grid_5x5[0][3]='O'
+pprint.pprint(grid_5x5)
+elif guess==4 and guess not in ans:
+grid_5x5[0][3]='X'
+pprint.pprint(grid_5x5)
+#Number 5
+elif guess==5 and guess in ans:
+grid_5x5[0][4]='O'
+pprint.pprint(grid_5x5)
+elif guess==5 and guess not in ans:
+grid_5x5[0][4]='X'
+pprint.pprint(grid_5x5)
+#Number 6
+elif guess==6 and guess in ans:
+grid_5x5[1][0]='O'
+pprint.pprint(grid_5x5)
+elif guess==6 and guess not in ans:
+grid_5x5[1][0]='X'
+pprint.pprint(grid_5x5)
+#Number 7
+elif guess==7 and guess in ans:
+grid_5x5[1][1]='O'
+pprint.pprint(grid_5x5)
+elif guess==7 and guess not in ans:
+grid_5x5[1][1]='X'
+pprint.pprint(grid_5x5)
+#Number 8
+elif guess==8 and guess in ans:
+grid_5x5[1][2]='O'
+pprint.pprint(grid_5x5)
+elif guess==8 and guess not in ans:
+grid_5x5[1][2]='X'
+pprint.pprint(grid_5x5)
+#Number 9
+elif guess==9 and guess in ans:
+grid_5x5[1][3]='O'
+pprint.pprint(grid_5x5)
+elif guess==9 and guess not in ans:
+grid_5x5[1][3]='X'
+pprint.pprint(grid_5x5)
+#Number 10
+elif guess==10 and guess in ans:
+grid_5x5[1][4]='O'
+pprint.pprint(grid_5x5)
+elif guess==10 and guess not in ans:
+grid_5x5[1][4]='X'
+pprint.pprint(grid_5x5)
+#Number 11
+elif guess==11 and guess in ans:
+grid_5x5[2][0]='O'
+pprint.pprint(grid_5x5)
+elif guess==11 and guess not in ans:
+grid_5x5[2][0]='X'
+pprint.pprint(grid_5x5)
+#Number 12
+elif guess==12 and guess in ans:
+grid_5x5[2][1]='O'
+pprint.pprint(grid_5x5)
+elif guess==12 and guess not in ans:
+grid_5x5[2][1]='X'
+pprint.pprint(grid_5x5)
+#Number 13
+elif guess==13 and guess in ans:
+grid_5x5[2][2]='O'
+pprint.pprint(grid_5x5)
+elif guess==13 and guess not in ans:
+grid_5x5[2][2]='X'
+pprint.pprint(grid_5x5)
+#Number 14
+elif guess==14 and guess in ans:
+grid_5x5[2][3]='O'
+pprint.pprint(grid_5x5)
+elif guess==14 and guess not in ans:
+grid_5x5[2][3]='X'
+pprint.pprint(grid_5x5)
+#Number 15
+elif guess==15 and guess in ans:
+grid_5x5[2][4]='O'
+pprint.pprint(grid_5x5)
+elif guess==15 and guess not in ans:
+grid_5x5[2][4]='X'
+pprint.pprint(grid_5x5)
+#Number 16
+elif guess==16 and guess in ans:
+grid_5x5[3][0]='O'
+pprint.pprint(grid_5x5)
+elif guess==16 and guess not in ans:
+grid_5x5[3][0]='X'
+pprint.pprint(grid_5x5)
+#Number 15
+elif guess==15 and guess in ans:
+grid_5x5[3][1]='O'
+pprint.pprint(grid_5x5)
+elif guess==16 and guess not in ans:
+grid_5x5[3][1]='X'
+pprint.pprint(grid_5x5)
+#Number 18 
+elif guess==15 and guess in ans:
+grid_5x5[3][2]='O'
+pprint.pprint(grid_5x5)
+elif guess==16 and guess not in ans:
+grid_5x5[3][2]='X'
+pprint.pprint(grid_5x5)
+#Number 19    
+elif guess==15 and guess in ans:
+grid_5x5[3][3]='O'
+pprint.pprint(grid_5x5)
+elif guess==16 and guess not in ans:
+grid_5x5[3][3]='X'
+pprint.pprint(grid_5x5)
+#Number 20    
+elif guess==15 and guess in ans:
+grid_5x5[3][4]='O'
+pprint.pprint(grid_5x5)
+elif guess==16 and guess not in ans:
+grid_5x5[3][4]='X'
+pprint.pprint(grid_5x5)
+#Number 21    
+elif guess==15 and guess in ans:
+grid_5x5[4][0]='O'
+pprint.pprint(grid_5x5)
+elif guess==16 and guess not in ans:
+grid_5x5[4][0]='X'
+pprint.pprint(grid_5x5)
+#Number 22
+elif guess==15 and guess in ans:
+grid_5x5[4][1]='O'
+pprint.pprint(grid_5x5)
+elif guess==16 and guess not in ans:
+grid_5x5[4][1]='X'
+pprint.pprint(grid_5x5)
+#Number 23
+elif guess==15 and guess in ans:
+grid_5x5[4][2]='O'
+pprint.pprint(grid_5x5)
+elif guess==16 and guess not in ans:
+grid_5x5[4][2]='X'
+pprint.pprint(grid_5x5)
+#Number 24    
+elif guess==15 and guess in ans:
+grid_5x5[4][3]='O'
+pprint.pprint(grid_5x5)
+elif guess==16 and guess not in ans:
+grid_5x5[4][3]='X'
+pprint.pprint(grid_5x5)
+#Number 25    
+elif guess==15 and guess in ans:
+grid_5x5[4][4]='O'
+pprint.pprint(grid_5x5)
+elif guess==16 and guess not in ans:
+grid_5x5[4][4]='X'
+pprint.pprint(grid_5x5)
+guessCount=guessCount-1
+
+
+else:
+print('Please input a correct guess.')
+int(input('Input a guess again.'))       
+
+
+
+elif grid3 not in ('3x3, 4x4, 5x5'):
+grid3 = input('Please input a valid level grid. (press enter)')
+grid3 = input('What level would you like to play? If you are done, type done.')
+
+print('Thank you for playing!')
